@@ -7,6 +7,7 @@ import CustomCursor from "@/components/animations/CustomCursor";
 import BackToTop from "@/components/ui/BackToTop";
 import { ThemeProvider, themeInitScript } from "@/components/providers/ThemeProvider";
 import Script from "next/script";
+import PortfolioChatbot from "@/components/PortfolioChatbot";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -153,6 +154,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
           <BackToTop />
         </ThemeProvider>
+        <PortfolioChatbot />
       </body>
     </html>
   );
