@@ -290,7 +290,7 @@ export const education: EducationItem[] = [
     institution: "PRIST University, Thanjavur",
     degree: "B.Tech",
     period: "2020 – 2024",
-    detail: "Aggregate: 68%",
+    detail: "",
   },
   {
     id: "jspiders",
