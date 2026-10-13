@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------- */
+/* Monochrome palette — Black & White                                */
+/* ---------------------------------------------------------------- */
+
+:root {
+  --background: #ffffff;
+  --surface: #f5f5f5;
+  --surface-2: #ebebeb;
+  --surface-border: rgba(0, 0, 0, 0.10);
+  --foreground: #0a0a0a;
+  --muted: #555555;
+  --muted-2: #888888;
+  --accent: #1a1a1a;
+  --accent-2: #444444;
+  --glass-bg: rgba(0, 0, 0, 0.04);
+  --grid-line: transparent;
+}
+
+:root[data-theme="dark"] {
+  --background: #0a0a0a;
+  --surface: #161616;
+  --surface-2: #222222;
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --foreground: #f0f0f0;
+  --muted: #a0a0a0;
+  --muted-2: #666666;
+  --accent: #e0e0e0;
+  --accent-2: #aaaaaa;
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --grid-line: transparent;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--surface-border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --font-display: var(--font-jakarta);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+}
+
+* {
+  border-color: var(--surface-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-2);
+  border-radius: 999px;
+  border: 2px solid var(--background);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* bg-grid squares removed — grid-line is transparent */
+.bg-grid {
+  background-image: none;
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--surface-border);
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 65%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glow-border {
+  position: relative;
+}
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--angle, 0deg), var(--accent), var(--accent-2), var(--accent));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.55;
+  animation: rotate-border 6s linear infinite;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-border {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-border::before {
+    animation: none;
+  }
+}
+
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 0.55ch;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: var(--accent);
+  animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .caret::after {
+    animation: none;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.cursor-glow {
+  display: none;
+}
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .cursor-glow {
+    display: block;
+  }
+}
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
