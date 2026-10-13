@@ -1,13 +1,17 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navLinks, personal } from "@/data/portfolio";
+import Image from "next/image";
 
-// Desktop nav links (subset matching reference design)
+// Desktop nav links
 const desktopLinks = navLinks.filter((l) =>
-  ["#about", "#experience", "#skills", "#projects", "#contact"].includes(l.href)
+  ["#about", "#experience", "#skills", "#projects", "#contact"].includes(
+    l.href
+  )
 );
 
 export default function Navbar() {
@@ -22,19 +26,22 @@ export default function Navbar() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+          if (entry.isIntersecting) {
+            setActive(`#${entry.target.id}`);
+          }
         });
       },
       { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
     );
 
-    sections.forEach((s) => observer.observe(s));
+    sections.forEach((section) => observer.observe(section));
+
     return () => observer.disconnect();
   }, []);
 
   return (
     <>
-      {/* ── Floating pill navbar ── */}
+      {/* Floating pill navbar */}
       <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
         <div
           className="pointer-events-auto flex w-full max-w-8xl items-center justify-between rounded-full px-6 py-4 gap-4"
@@ -46,31 +53,39 @@ export default function Navbar() {
             boxShadow: "0 8px 32px rgba(0,0,0,0.45)",
           }}
         >
-          {/* ── Logo + Name ── */}
+          {/* Logo + Name */}
           <a
             href="#home"
             className="flex items-center gap-3 group focus:outline-none shrink-0"
             aria-label="Home"
           >
-            <span
-              className="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-sm text-white shadow-md transition-transform duration-200 group-hover:scale-105"
-              style={{ background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)" }}
-            >
-              {personal.initials}
-            </span>
+            <Image
+              src="/logo.png"
+              alt="Delwin D'Cruz logo"
+              width={40}
+              height={40}
+              priority
+              className="h-10 w-10 rounded-xl object-contain transition-transform duration-200 group-hover:scale-105"
+            />
+
             <span className="hidden sm:block font-semibold text-white text-sm tracking-wide">
               {personal.name}
             </span>
           </a>
 
-          {/* ── Desktop Nav Links ── */}
-          <nav className="hidden md:flex items-center gap-0.5" aria-label="Primary">
+          {/* Desktop Nav Links */}
+          <nav
+            className="hidden md:flex items-center gap-0.5"
+            aria-label="Primary"
+          >
             {desktopLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 className={`relative rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-200 focus:outline-none ${
-                  active === link.href ? "text-white" : "text-white/55 hover:text-white"
+                  active === link.href
+                    ? "text-white"
+                    : "text-white/55 hover:text-white"
                 }`}
               >
                 {active === link.href && (
@@ -78,21 +93,29 @@ export default function Navbar() {
                     layoutId="nav-pill"
                     className="absolute inset-0 rounded-full"
                     style={{ background: "rgba(255,255,255,0.09)" }}
-                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 380,
+                      damping: 32,
+                    }}
                   />
                 )}
+
                 <span className="relative z-10">{link.label}</span>
               </a>
             ))}
           </nav>
 
-          {/* ── CTA + Mobile hamburger ── */}
+          {/* CTA + Mobile hamburger */}
           <div className="flex items-center gap-2 shrink-0">
-            {/* "Let's Talk" — bright green pill, always visible */}
+            {/* Let's Talk button */}
             <a
               href="#contact"
               className="rounded-full px-5 py-1.5 text-sm font-semibold text-black transition-all duration-200 hover:brightness-110 hover:shadow-[0_0_18px_rgba(34,197,94,0.45)] focus:outline-none hidden sm:block"
-              style={{ background: "linear-gradient(135deg, #4ade80 0%, #22c55e 100%)" }}
+              style={{
+                background:
+                  "linear-gradient(135deg, #4ade80 0%, #22c55e 100%)",
+              }}
             >
               Let&apos;s Talk
             </a>
@@ -111,7 +134,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* ── Mobile dropdown (below the pill) ── */}
+      {/* Mobile dropdown */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -144,11 +167,15 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
                 className="mt-1 rounded-full px-5 py-2.5 text-sm font-semibold text-black text-center transition-all hover:brightness-110"
-                style={{ background: "linear-gradient(135deg, #4ade80 0%, #22c55e 100%)" }}
+                style={{
+                  background:
+                    "linear-gradient(135deg, #4ade80 0%, #22c55e 100%)",
+                }}
               >
                 Let&apos;s Talk
               </a>
