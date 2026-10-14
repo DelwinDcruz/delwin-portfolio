@@ -79,7 +79,7 @@ export const experience: ExperienceItem[] = [
     id: "portfolix",
     role: "Full Stack Developer",
     company: "Portfolix Tech",
-    period: "Apr 2026 – Present",
+    period: "Mar 2026 – Sep 2026",
     summary:
       "Developing and maintaining responsive, production-ready web applications end-to-end, from frontend interfaces to backend services and database integration.",
     frontend: [
@@ -113,7 +113,7 @@ export const experience: ExperienceItem[] = [
     id: "inmakes",
     role: "Java Development Intern",
     company: "Inmakes Infotech Pvt. Ltd.",
-    period: "Nov 2025 – Apr 2026",
+    period: "Oct 2025 – Mar 2026",
     summary:
       "Developed backend applications and supported end-to-end web application delivery alongside senior developers.",
     backend: ["Core Java", "JDBC", "Hibernate ORM", "Spring Boot"],

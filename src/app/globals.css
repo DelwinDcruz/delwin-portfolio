@@ -1,35 +1,36 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------- */
-/* Monochrome palette — Black & White                                */
+/* Ink Wash palette                                                  */
+/* Charcoal #4A4A4A · Silver #CBCBCB · Ivory #FFFFE3 · Slate #6D8196 */
 /* ---------------------------------------------------------------- */
 
 :root {
-  --background: #ffffff;
-  --surface: #f5f5f5;
-  --surface-2: #ebebeb;
-  --surface-border: rgba(0, 0, 0, 0.10);
-  --foreground: #0a0a0a;
-  --muted: #555555;
-  --muted-2: #888888;
-  --accent: #1a1a1a;
-  --accent-2: #444444;
-  --glass-bg: rgba(0, 0, 0, 0.04);
-  --grid-line: transparent;
+  --background: #fffef2;
+  --surface: #ffffff;
+  --surface-2: #f2f0dd;
+  --surface-border: rgba(74, 74, 74, 0.16);
+  --foreground: #3a3a3a;
+  --muted: #63666b;
+  --muted-2: #8f9296;
+  --accent: #6d8196;
+  --accent-2: #41505c;
+  --glass-bg: rgba(74, 74, 74, 0.035);
+  --grid-line: rgba(74, 74, 74, 0.06);
 }
 
 :root[data-theme="dark"] {
-  --background: #0a0a0a;
-  --surface: #161616;
-  --surface-2: #222222;
-  --surface-border: rgba(255, 255, 255, 0.08);
-  --foreground: #f0f0f0;
-  --muted: #a0a0a0;
-  --muted-2: #666666;
-  --accent: #e0e0e0;
-  --accent-2: #aaaaaa;
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --grid-line: transparent;
+  --background: #222325;
+  --surface: #34363a;
+  --surface-2: #44464a;
+  --surface-border: rgba(255, 255, 255, 0.09);
+  --foreground: #f2f1de;
+  --muted: #c2c2c2;
+  --muted-2: #86888b;
+  --accent: #93a7b6;
+  --accent-2: #6d8196;
+  --glass-bg: rgba(255, 255, 255, 0.035);
+  --grid-line: rgba(255, 255, 255, 0.05);
 }
 
 @theme inline {
@@ -90,9 +91,11 @@ body {
   }
 }
 
-/* bg-grid squares removed — grid-line is transparent */
 .bg-grid {
-  background-image: none;
+  background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
 }
 
 .glass {
